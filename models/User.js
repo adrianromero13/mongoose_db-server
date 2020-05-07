@@ -19,7 +19,9 @@ const UserSchema = new Schema({
     dateCreated: {
         type: Date,
         default: Date.now()
-    }
+    },
+    // ref: what model should this be referenced to?
+    todos: [ {type: Schema.Types.ObjectId, ref: 'Todo'}]
 });
 
 module.exports = model('User', UserSchema);
