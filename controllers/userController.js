@@ -3,6 +3,7 @@ const { User, Todo } = require('./../models');
 
 module.exports = {
   addTodo: async (req, res) => {
+    console.log(req.user);
     // const { text, (hardcoded which will be handled by middleware)}
     const { text, userId } = req.body;
     if (!text) {
