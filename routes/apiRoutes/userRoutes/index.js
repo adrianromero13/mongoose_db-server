@@ -1,4 +1,5 @@
 const router = require('express').Router();
+
 // destructure the userController folder
 const { addTodo, getAllUserEmails } = require('./../../../controllers/userController');
 const { requireAuth } = require('./../../../middlewares/authMiddleware');
