@@ -1,3 +1,3 @@
 module.exports = {
-    secret: 'hfojpqweohrp9qw8pjwefohepy8wo;irtHPOW48T4IIOJSD;OJSF;OHl;sfjd;oha lih'
+  secret: 'asdfhugadpi8atfgr097845trhgweastuy0q83tasdhuysaiydgaiypsgasyupgasuiygasyuogasyudasgfaosugdsauodgasyouas'
 };

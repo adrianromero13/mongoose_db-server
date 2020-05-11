@@ -1,14 +1,14 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
 //setting up server
-const routes = require('./routes'); //automatically grabs index.js from routes folder
+const mongoose = require('mongoose'); //automatically grabs index.js from routes folder
+
+const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-//set up middleware
+// Setup middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,6 +18,6 @@ app.use(routes);
 // passing down the results of the authentication strategies in jwtAuth
 require('./services/passport');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo_db', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/todo_db', { useNewUrlParser: true,  useUnifiedTopology: true  });
 
 app.listen(PORT, () => console.log("Server started"));

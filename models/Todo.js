@@ -4,7 +4,7 @@ const TodoSchema = new Schema({
   text: {
     type: String,
     required: true,
-    // trim takes away white spaces (beginning, end)
+    // trim cuts white noise before and after string
     trim: true
   },
   completed: {

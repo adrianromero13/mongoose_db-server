@@ -1,6 +1,5 @@
 const { User, Todo } = require('./../models');
 
-
 module.exports = {
   addTodo: async (req, res) => {
     console.log(req.user);
@@ -10,12 +9,10 @@ module.exports = {
     if (!text) {
       return res.status(403).json({ error: 'You must provide a text ' });
     }
-
     try {
       // needs to be 'await'
-      const newTodo = await new Todo({ text, user: req.user._id }).save(); //saved in the database
+      const newTodo = await new Todo({ text, user: req.user._id }).save();  //saved in the database
       //bust must also be saved in user's interface
-      
       // use of .push, then save the change
       req.user.todos.push(newTodo);
       await req.user.save();
@@ -25,7 +22,8 @@ module.exports = {
       return res.status(403).json({ e });
     }
   },
-    getAllUserEmails: async (req, res) => {
+  
+  getAllUserEmails: async (req, res) => {
     try {
       const userEmails = await User.find({}, 'email');
       if (!userEmails) { return res.status(404).json({ error: 'No user emails found ' }); }
