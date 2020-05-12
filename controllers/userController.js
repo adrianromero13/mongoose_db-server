@@ -45,4 +45,26 @@ module.exports = {
       return res.status(403).json({ e });
     }
   },
+  deleteUserTodoById: async (req, res) => {
+    const { todoId } = req.params;
+    try {
+      const todoToDelete = await Todo.findById(todoId);
+      //check if there is a todo to delete
+      if (!todoToDelete) {
+        return res.status(401).json({ error: 'No todo with that id' });
+      }
+
+      // Check if the current todo belongs to the current logged in user
+      //delete should only happen if this is true
+      if(req.user._id.toString() !== todoToDelete.user.toString()) { // set .toString to set objects as string
+        return res.status(401).json({ error: 'You cannot delete a todo that is not yours!' });
+      }
+      
+      const deletedTodo = await Todo.findByIdAndDelete(todoId);
+      //respond back to the user with the deleted todo (to be stored in memory)
+      return res.status(200).json({ deletedTodo });
+    } catch (e) {
+      return res.status(403).json({ e });
+    }
+  }
 }
