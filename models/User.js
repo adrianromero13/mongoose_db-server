@@ -43,8 +43,8 @@ UserSchema.pre('save', async function (next) {
       next(e);
     }
   }
-  //  overwrite the plain text password with our hash
   user.password = hash;
+  //  overwrite the plain text password with our hash
   console.log(user.password);
   // Finally call save
   next();

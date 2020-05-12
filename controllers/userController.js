@@ -12,7 +12,7 @@ module.exports = {
     try {
       // needs to be 'await'
       const newTodo = await new Todo({ text, user: req.user._id }).save();  //saved in the database
-      //bust must also be saved in user's interface
+      //but must also be saved in user's interface
       // use of .push, then save the change
       req.user.todos.push(newTodo);
       await req.user.save();
@@ -31,5 +31,18 @@ module.exports = {
     } catch (e) {
       return res.status(403).json({ e });
     }
-  }
+  },
+
+  getUserTodos: async (req, res) => {
+    // console.log(req.user);
+    try {
+      // const user = await await User.findById(req.user._id).populate('todos', 'completed');
+      
+      // grab all todos and finding the todos made by the user
+      const userTodos = await Todo.find({ user: req.user._id }, 'completed text');
+      return res.status(200).json(userTodos);
+    } catch (e) {
+      return res.status(403).json({ e });
+    }
+  },
 }
