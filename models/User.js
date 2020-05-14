@@ -30,23 +30,19 @@ const UserSchema = new Schema({
 UserSchema.pre('save', async function (next) {
   // using 'this' so function must be used
   const user = this;
-  //undefined variables 'salt' & 'hash'
-  let salt;
-  let hash;
   // has user modified properties?
   if (user.isModified('password')) {
     try {
       // generate a random string to use as 'salt'
-      salt = await bcrypt.genSalt();   //will return a promise if no callback function, therefore 'await' it
-      hash = await bcrypt.hash(user.password, salt);
+      let salt = await bcrypt.genSalt();   //will return a promise if no callback function, therefore 'await' it
+      let hash = await bcrypt.hash(user.password, salt);
+      // Finally call save
+      next();
     } catch (e) {
       next(e);
     }
   }
-  user.password = hash;
-  //  overwrite the plain text password with our hash
-  console.log(user.password);
-  // Finally call save
+  //call next to end module and prepare for next
   next();
 });
 
